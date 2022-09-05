@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 import schedule
 import time
 from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
-import telebot
 import threading
 
 ## 5537571435:AAFKu1oQTN7mz4vvvf0XZ-7hgbCMxH3ezXM - -646227103
