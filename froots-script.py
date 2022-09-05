@@ -64,7 +64,7 @@ def handle_change(update, context):
                         str(data["floorPrice"] / 1000000000) + " SOL"
                     )
                 )
-                time.sleep(5)
+                time.sleep(10)
                 print("başarılı bir şekilde değiştirdi")
                 wrong_project_given = False
             except:
