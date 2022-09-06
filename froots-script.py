@@ -5,6 +5,10 @@ import schedule
 import time
 from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
 import threading
+import sys
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 ## 5537571435:AAFKu1oQTN7mz4vvvf0XZ-7hgbCMxH3ezXM - -646227103
 
@@ -48,15 +52,18 @@ def handle_change(update, context):
         while True:
             if stop and not wrong_project_given:
                 print("while looptan çıktı")
+                sys.exit()
                 return
-            res = requests.get(url)
+            res = requests.get(url, verify=False)
             data = json.loads(res.text)
             if stop and not wrong_project_given:
                 print("while looptan çıktı")
+                sys.exit()
                 return
             try:
                 if latest_price == data["floorPrice"]:
                     wrong_project_given = False
+                    time.sleep(3)
                     continue
                 latest_price = data["floorPrice"]
                 requests.get(
@@ -64,7 +71,6 @@ def handle_change(update, context):
                         str(data["floorPrice"] / 1000000000) + " SOL"
                     )
                 )
-                time.sleep(10)
                 print("başarılı bir şekilde değiştirdi")
                 wrong_project_given = False
             except:
@@ -73,6 +79,7 @@ def handle_change(update, context):
                 latest_price = 0
                 stop = True
                 print("bulamadı")
+                sys.exit()
                 return
 
     t1 = threading.Thread(target=thread1, args=(update, context))
