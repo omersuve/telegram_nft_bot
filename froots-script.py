@@ -55,6 +55,10 @@ def handle_change(update, context):
                 sys.exit()
                 return
             res = requests.get(url, verify=False)
+            if res is None:
+                print("none döndü")
+                sys.exit()
+                return
             data = json.loads(res.text)
             if stop and not wrong_project_given:
                 print("while looptan çıktı")
