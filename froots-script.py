@@ -110,7 +110,7 @@ def error(update, context):
     print(f"Update {update} caused error: {context.error}")
 
 
-updater = Updater("5537571435:AAFKu1oQTN7mz4vvvf0XZ-7hgbCMxH3ezXM")
+updater = Updater(os.getenv("TELEGRAM_KEY"))
 dp = updater.dispatcher
 dp.add_handler(CommandHandler("project_change", handle_change))
 dp.add_handler(CommandHandler("stop", handle_stop))
