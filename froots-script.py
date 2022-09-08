@@ -7,14 +7,22 @@ from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
 import threading
 import sys
 import urllib3
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-## 5537571435:AAFKu1oQTN7mz4vvvf0XZ-7hgbCMxH3ezXM - -646227103
-
 url = "https://api-mainnet.magiceden.dev/v2/collections/frootsnft/stats"
 url_changed = "https://api-mainnet.magiceden.dev/v2/collections/"
-telegram_base_url = "https://api.telegram.org/bot5537571435:AAFKu1oQTN7mz4vvvf0XZ-7hgbCMxH3ezXM/sendMessage?chat_id=-646227103&text={}"
+telegram_base_url = (
+    "https://api.telegram.org/bot"
+    + os.getenv("TELEGRAM_KEY")
+    + "/sendMessage?chat_id="
+    + os.getenv("CHAT_ID")
+    + "&text={}"
+)
 latest_price = 0
 stop = True
 wrong_project_given = False
